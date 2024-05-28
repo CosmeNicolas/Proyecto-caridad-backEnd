@@ -4,8 +4,51 @@ import mongoose, {Schema} from "mongoose";
 /* Creamos objeto y lo instanciamos con el new*/
 
 const donacionShema = new Schema({
-    Imagen: {
-        type: "Buffer",
-        required: true
+  imagen: {
+    type: "String",
+    required: true,
+    validate:{
+        validator:(valor)=>{
+            const pattern =
+            /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|jpeg|gif|png)/;
+            return pattern.test(valor);
+        /*  return /^image\/(jpeg|png|gif|jpg)$/.test(valor) */
+        },
+        message: dato =>`${dato.value} no es una imagen valida`
     }
-})
+  },
+  nombreDonacion: {
+    type: "String",
+    required: true,
+    minLength: 2,
+    maxLenth:50,
+    unique:true,
+  },
+  descripcion: {
+    type: "String",
+    required: true,
+    minLength: 3,
+    maxLenth:100,
+  },
+  categoria:{
+    type:'String',
+    required: true,
+    enum: ["Ropa","Papel", "Plastico", "Vidrio","Muebles","Electrodomesticos","Tecnologia y Accesorios","Herramientas","Otros"],
+  },
+  estado:{
+    type:'String',
+    required: true,
+    enum: ["Casi Nuevo", "Usado"],
+  },
+  nombreCooperador:{
+    type: "String",
+    require: true,
+    Unique: true
+  },
+  numeroContacto: {
+    type: Number,
+    required: true,
+    min:10,
+    max:10
+  },
+});
