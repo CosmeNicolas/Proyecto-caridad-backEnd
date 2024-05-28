@@ -52,3 +52,9 @@ const donacionShema = new Schema({
     max:10
   },
 });
+
+//crear el modelo de donaciones 
+const Donacion = mongoose.model('donacion',donacionShema)
+
+//esport por defecto
+export default Donacion
