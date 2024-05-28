@@ -5,6 +5,8 @@ import morgan from 'morgan';
 import path from 'path'
 import { fileURLToPath } from 'url';
 import { listarDonaciones } from './src/controllers/donaciones.controllers.js';
+import './src/database/database.js'
+
 //1 - configurar un puerto 
 
 const app = express();
