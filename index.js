@@ -4,6 +4,7 @@ import cors from 'cors'
 import morgan from 'morgan';
 import path from 'path'
 import { fileURLToPath } from 'url';
+import { listarDonaciones } from './src/controllers/donaciones.controllers.js';
 //1 - configurar un puerto 
 
 const app = express();
@@ -25,8 +26,9 @@ const __direname = path.dirname(__filename)
 /* console.log(path.join(__direname,'/public')) */
 app.use(express.static(path.join(__direname,'/public')))
 //3 - configurar las rutas
-app.get('/', (req, res)=>{
+app.use('/api', listarDonaciones)
+/* app.get('/', (req, res)=>{
     //agregar logica
     console.log('procesando...')
     res.send('respuesat caridad')
-})
+}) */
