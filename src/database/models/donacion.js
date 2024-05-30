@@ -48,8 +48,8 @@ const donacionShema = new Schema({
   numeroContacto: {
     type: Number,
     required: true,
-    min:10,
-    max:10
+    minLength:10,
+    maxLenth:10
   },
 });
 

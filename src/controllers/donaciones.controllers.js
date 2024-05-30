@@ -8,8 +8,8 @@ export const listarDonaciones =(req, res)=>{
 export const crearDonacion = async(req, res)=>{
     try {
         //extraer los datos del body
-       /*  console.log(req)
-        console.log(req.body) */
+        console.log(req)
+        console.log(req.body)
         //todo: validar los datos del body
         //pedir a la base de datos crear el producto
         const donacionNueva = new Donacion(req.body);

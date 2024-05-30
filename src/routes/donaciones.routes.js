@@ -1,5 +1,5 @@
 import { Router } from "express";//enrutador de express
-import { crearDonacion, listarDonaciones } from "../controllers/donaciones.controllers";
+import { crearDonacion, listarDonaciones } from "../controllers/donaciones.controllers.js";
 
 
 const router = Router();

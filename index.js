@@ -4,7 +4,7 @@ import cors from 'cors'
 import morgan from 'morgan';
 import path from 'path'
 import { fileURLToPath } from 'url';
-import { crearDonacion, listarDonaciones } from './src/controllers/donaciones.controllers.js';
+import donacionesRouter from './src/routes/donaciones.routes.js'
 import './src/database/database.js'
 
 //1 - configurar un puerto 
@@ -28,7 +28,7 @@ const __direname = path.dirname(__filename)
 /* console.log(path.join(__direname,'/public')) */
 app.use(express.static(path.join(__direname,'/public')))
 //3 - configurar las rutas
-app.use('/api', crearDonacion)
+app.use('/api', donacionesRouter)
 /* app.get('/', (req, res)=>{
     //agregar logica
     console.log('procesando...')
