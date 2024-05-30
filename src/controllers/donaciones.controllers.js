@@ -41,3 +41,19 @@ export const crearDonacion = async(req, res)=>{
         res.status(400).json({mensaje: 'La donación no fue creado'})
     }
 }
+//!EditarDonacionxID
+export const editarDonacionxID = async (req, res)=>{
+    try {
+        const donacionBuscada = await Donacion.findById(req.params.id)
+        if(!donacionBuscada){
+          return  res.status(404).json({mensaje:'No se encontro la donación con su ID'})
+        }
+        /* actualizamos la donacion encontrada que viene en el body de la petición */
+        await Donacion.findByIdAndUpdate(req.params.id, req.body)
+        //responder
+        res.status(200).json({mensaje:'La donacion fue editada'})
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({mensaje:'No se pudo editar la donación'})
+    }
+}
