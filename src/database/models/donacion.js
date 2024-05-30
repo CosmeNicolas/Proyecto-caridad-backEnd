@@ -47,6 +47,7 @@ const donacionShema = new Schema({
   },
   numeroContacto: {
     type: Number,
+    min: 0,
     required: true,
     minLength:10,
     maxLenth:10

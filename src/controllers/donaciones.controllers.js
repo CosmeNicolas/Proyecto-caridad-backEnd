@@ -10,6 +10,20 @@ export const listarDonaciones = async (req, res)=>{
         res.status(500).json({mensaje:'Error la buscar las donaciones'})
     }
 }
+//!Obtener Donación x ID
+export const obtenerDonacion = async (req, res)=>{
+    try {
+        const donacionXid = await Donacion.findById(req.params.id) 
+        if(!donacionXid){
+            return res.status(404).json({mensaje: 'La donacion no exitse'})
+        }
+        res.status(200).json(donacionXid)
+    } catch (error) {
+        console.error(error)
+        /* respondemos con 404 por no encontrar el id  */
+        res.status(404).json({mensaje:'Error al encontrar donacion'})
+    }
+}
 //!Crear Donación
 export const crearDonacion = async(req, res)=>{
     try {
