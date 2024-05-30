@@ -1,15 +1,16 @@
 import Donacion from "../database/models/donacion.js"
-
+//!Listar Donaciones
 export const listarDonaciones = async (req, res)=>{
-    /* console.log('envio de donaciones') */
     try {
-        const mostrarDonaciones = await Donacion(req.body)
-        res.status(200).json({mensaje:'Listando donaciones'})
+        const donaciones = await Donacion.find()
+        res.status(200).json(donaciones)
     } catch (error) {
-        console.log(first)
+        /* cuando falla el servido , error interno */
+        console.error(error)
+        res.status(500).json({mensaje:'Error la buscar las donaciones'})
     }
 }
-
+//!Crear Donación
 export const crearDonacion = async(req, res)=>{
     try {
         //extraer los datos del body
