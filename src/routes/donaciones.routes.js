@@ -1,8 +1,10 @@
 import { Router } from "express";//enrutador de express
-import { listarDonaciones } from "../controllers/donaciones.controllers.js";
+import { crearDonacion, listarDonaciones } from "../controllers/donaciones.controllers";
 
-const router = Router()
+
+const router = Router();
 //?como creo las rutas
-router.route('/donaciones').get(listarDonaciones)
+
+router.route('/donaciones').get(listarDonaciones).post(crearDonacion)
 
 export default router;
