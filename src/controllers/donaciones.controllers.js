@@ -57,3 +57,21 @@ export const editarDonacionxID = async (req, res)=>{
         res.status(500).json({mensaje:'No se pudo editar la donación'})
     }
 }
+
+//!Eliminar Donación 
+export const elimarDonacion = async(req, res)=>{
+    try {
+        const donacion = await Donacion.findById(req.params.id)
+        if(!donacion){
+            return res.status(404).json({mensaje: 'No se pudo encontrar la donación a Eliminar'})
+        }
+        //en este caso solo encesitamos los parametros de las respuestas por Id y no los datos del body 
+        await Donacion.findByIdAndDelete(req.params.id)
+        res.status(200).json({mensaje:'La donación fue eliminada'})
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({mensaje: 'No se pudo borrar la Donación'})
+    }
+   
+
+}
