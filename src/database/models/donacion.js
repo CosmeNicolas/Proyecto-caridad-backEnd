@@ -7,16 +7,16 @@ const donacionShema = new Schema({
   imagen: {
     type: "String",
     required: true,
-    validate:{
+   /*  validate:{
         validator:(valor)=>{
             const pattern =
             /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|jpeg|gif|png)/;
-            return pattern.test(valor);
+            return pattern.test(valor); */
         /*  return /^image\/(jpeg|png|gif|jpg)$/.test(valor) */
-        },
+      /*   },
         message: dato =>`${dato.value} no es una imagen valida`
-    }
-  },
+    }*/
+  }, 
   nombreDonacion: {
     type: "String",
     required: true,
