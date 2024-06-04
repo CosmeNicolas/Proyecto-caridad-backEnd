@@ -1,4 +1,4 @@
-import express, { urlencoded } from 'express'
+import express from 'express'
 import 'dotenv/config' //permite procesar la variable de entorno
 import cors from 'cors'
 import morgan from 'morgan';
@@ -6,10 +6,23 @@ import path from 'path'
 import { fileURLToPath } from 'url';
 import donacionesRouter from './src/routes/donaciones.routes.js'
 import './src/database/database.js'
+import multer from 'multer';
+
+
+const upload = multer({ dest: 'uploads/' })
+
 
 //1 - configurar un puerto 
 
 const app = express();
+
+app.post('/donaciones/single',upload.single('imagenDonacion'),(req,res)=>{
+    console.log(req.file)
+    guardarImagenDonacion(req.file)
+    res.send('Enviando Imagen')
+})
+
+
 app.set('port',process.env.PORT || 4000);
 
 app.listen(app.get('port'), ()=>{
@@ -34,3 +47,10 @@ app.use('/api', donacionesRouter)
     console.log('procesando...')
     res.send('respuesat caridad')
 }) */
+
+const guardarImagenDonacion=async (file)=>{
+    const fs = await import('node:fs');
+    const nuevaRuta = `./uploads/${file.originalname}`
+    fs.renameSync(file.path, nuevaRuta)
+    return nuevaRuta
+}
