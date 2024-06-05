@@ -40,7 +40,7 @@ export const crearDonacion = async (req, res) => {
         const imagenURL = await guardarImagenDonacion(req.file);
         const donacionNueva = new Donacion({
             ...req.body,
-            imagen: imagenURL
+            imagen: imagenURL  // Guardamos la URL completa en la base de datos
         });
         await donacionNueva.save();
         res.status(201).json({ mensaje: 'Donación creada' });
