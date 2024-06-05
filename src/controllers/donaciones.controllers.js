@@ -2,11 +2,6 @@ import Donacion from '../database/models/donacion.js';
 import fs from 'fs/promises';
 import path from 'path';
 
-const guardarImagenDonacion = async (file) => {
-    const nuevaRuta = path.join('uploads', file.originalname);
-    await fs.rename(file.path, nuevaRuta);
-    return nuevaRuta;
-};
 
 // Listar Donaciones
 export const listarDonaciones = async (req, res) => {
@@ -34,6 +29,12 @@ export const obtenerDonacion = async (req, res) => {
 };
 
 // Crear Donación
+const guardarImagenDonacion = async (file) => {
+    const nuevaRuta = path.join('uploads', file.originalname);
+    await fs.rename(file.path, nuevaRuta);
+    return nuevaRuta;
+};
+
 export const crearDonacion = async (req, res) => {
     try {
         const imagenURL = await guardarImagenDonacion(req.file);
