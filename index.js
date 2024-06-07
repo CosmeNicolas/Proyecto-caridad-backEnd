@@ -7,7 +7,7 @@ import { fileURLToPath } from 'url';
 import donacionesRouter from './src/routes/donaciones.routes.js';
 import './src/database/database.js';
 import multer from 'multer';
-import fs from 'fs/promises';
+import fs from 'node:fs/promises'; // Asegúrate de importar fs aquí
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -33,19 +33,15 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // Ruta para manejar la carga de una sola imagen y creación de donación
 app.post('/donaciones/single', upload.single('imagenDonacion'), async (req, res) => {
     console.log(req.file);
-    try {
-        const nuevaRuta = await guardarImagenDonacion(req.file);
-        res.json({ message: 'Imagen subida y guardada', path: nuevaRuta });
-    } catch (error) {
-        res.status(500).json({ error: 'Error al guardar la imagen' });
-    }
+    await guardarImagenDonacion(req.file);
+    res.send('Enviando Imagen');
 });
 
 // Rutas
 app.use('/api', donacionesRouter);
 
 const guardarImagenDonacion = async (file) => {
-    const nuevaRuta = path.join(__dirname, 'uploads', file.originalname);
+    const nuevaRuta = path.join('uploads', file.originalname);
     await fs.rename(file.path, nuevaRuta);
     return nuevaRuta;
 };
