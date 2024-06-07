@@ -1,18 +1,18 @@
 {
     "builds": [
-        {
-            "src": "index.js",
-            "use": "@vercel/node"
-        }
+      {
+        "src": "index.js",
+        "use": "@vercel/node"
+      }
     ],
     "routes": [
-        {
-            "src": "/uploads/(.*)",
-            "dest": "/uploads/$1"
-        },
-        {
-            "src": "/(.*)",
-            "dest": "/"
-        }
+      {
+        "src": "/api/uploads/(.*)",
+        "dest": "/api/upload"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "/"
+      }
     ]
-}
+  }
