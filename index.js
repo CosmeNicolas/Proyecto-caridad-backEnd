@@ -27,6 +27,16 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Verifica que el directorio 'uploads' exista
+const createUploadsDir = async () => {
+    try {
+        await fs.mkdir(path.join(__dirname, 'uploads'), { recursive: true });
+    } catch (err) {
+        console.error('Error al crear el directorio uploads:', err);
+    }
+};
+createUploadsDir();
+
 // Sirve la carpeta 'uploads' como recursos estáticos
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
@@ -41,7 +51,7 @@ app.post('/donaciones/single', upload.single('imagenDonacion'), async (req, res)
 app.use('/api', donacionesRouter);
 
 const guardarImagenDonacion = async (file) => {
-    const nuevaRuta = path.join('uploads', file.originalname);
+    const nuevaRuta = path.join(__dirname, 'uploads', file.originalname);
     await fs.rename(file.path, nuevaRuta);
     return nuevaRuta;
 };
