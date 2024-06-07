@@ -7,13 +7,12 @@
   ],
   "routes": [
     {
-      "src": "/(.*)",
-      "dest": "/"
-    },
-    {
       "src": "/donaciones/single",
       "dest": "/index.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.js"
     }
-    
   ]
 }

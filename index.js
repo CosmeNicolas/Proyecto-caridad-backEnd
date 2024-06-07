@@ -7,7 +7,7 @@ import { fileURLToPath } from 'url';
 import donacionesRouter from './src/routes/donaciones.routes.js';
 import './src/database/database.js';
 import multer from 'multer';
-import fs from 'node:fs/promises'; // Asegúrate de importar fs aquí
+import fs from 'fs/promises';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
