@@ -7,6 +7,10 @@
   ],
   "routes": [
     {
+      "src": "/uploads/(.*)",
+      "dest": "/uploads/$1"
+    },
+    {
       "src": "/donaciones/single",
       "dest": "/index.js"
     },
