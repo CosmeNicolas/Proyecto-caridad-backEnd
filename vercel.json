@@ -11,10 +11,6 @@
       "dest": "/uploads/$1"
     },
     {
-      "src": "/donaciones/single",
-      "dest": "/index.js"
-    },
-    {
       "src": "/(.*)",
       "dest": "/index.js"
     }

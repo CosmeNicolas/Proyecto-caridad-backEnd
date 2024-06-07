@@ -7,7 +7,7 @@ import { fileURLToPath } from 'url';
 import donacionesRouter from './src/routes/donaciones.routes.js';
 import './src/database/database.js';
 import multer from 'multer';
-import fs from 'node:fs/promises';
+import fs from 'fs/promises';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -30,6 +30,9 @@ app.use(express.urlencoded({ extended: true }));
 // Sirve la carpeta 'uploads' como recursos estáticos
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
+// Sirve la carpeta 'public' como recursos estáticos
+app.use(express.static(path.join(__dirname, 'public')));
+
 // Ruta para manejar la carga de una sola imagen y creación de donación
 app.post('/donaciones/single', upload.single('imagenDonacion'), async (req, res) => {
     console.log(req.file);
@@ -41,7 +44,7 @@ app.post('/donaciones/single', upload.single('imagenDonacion'), async (req, res)
 app.use('/api', donacionesRouter);
 
 const guardarImagenDonacion = async (file) => {
-    const nuevaRuta = path.join('uploads', file.originalname);
+    const nuevaRuta = path.join(__dirname, 'uploads', file.originalname);
     await fs.rename(file.path, nuevaRuta);
     return nuevaRuta;
 };
