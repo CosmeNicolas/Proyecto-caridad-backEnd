@@ -21,7 +21,7 @@ const donacionSchema = new Schema({
     categoria: {
         type: String,
         required: true,
-        enum: ["Ropa", "Papel", "Plastico", "Vidrio", "Muebles", "Electrodomesticos", "Tecnologia y Accesorios", "Herramientas", "Otros"],
+        enum: ["Ropa", "Papel", "Plastico", "Vidrio", "Muebles", "Electrodomestico", "Tecnologia y Accesorios", "Herramientas", "Otros"],
     },
     estado: {
         type: String,
