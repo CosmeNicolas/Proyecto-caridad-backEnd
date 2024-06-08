@@ -1,7 +1,7 @@
 import mongoose, { Schema } from 'mongoose';
 
 const donacionSchema = new Schema({
-    imagen: {
+    imagenDonacion: {
         type: String,
         required: true,
     },
@@ -10,7 +10,6 @@ const donacionSchema = new Schema({
         required: true,
         minLength: 2,
         maxLength: 50,
-        unique: true,
     },
     descripcion: {
         type: String,
@@ -31,7 +30,6 @@ const donacionSchema = new Schema({
     nombreCooperador: {
         type: String,
         required: true,
-        unique: true,
     },
     numeroContacto: {
         type: Number,
