@@ -22,9 +22,7 @@ app.listen(app.get('port'), () => {
 });
 
 // Middlewares
-app.use(cors({
-    origin: 'https://tucu-manos.netlify.app' // Permitir solicitudes solo desde este dominio
-}));
+app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
