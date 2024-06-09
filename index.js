@@ -29,7 +29,7 @@ const storage = new CloudinaryStorage({
     params: {
         folder: 'donaciones',
         format: async (req, file) => 'png', // Puedes cambiar el formato si lo deseas
-        public_id: (req, file) => file.originalname,
+        public_id: (req, file) => file.originalname.split('.')[0], // Nombre del archivo sin extensión
     },
 });
 
@@ -46,9 +46,6 @@ app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-// Sirve la carpeta 'public' como recursos estáticos
-app.use(express.static(path.join(__dirname, 'public')));
 
 // Sirve la carpeta 'public' como recursos estáticos
 app.use(express.static(path.join(__dirname, 'public')));
