@@ -1,6 +1,5 @@
 import Donacion from '../database/models/donacion.js';
-import fs from 'fs/promises';
-import path from 'path';
+import { v2 as cloudinary } from 'cloudinary';
 
 
 // Listar Donaciones
@@ -28,25 +27,33 @@ export const obtenerDonacion = async (req, res) => {
     }
 };
 
-// Crear Donación
-const guardarImagenDonacion = async (file) => {
-    const nuevaRuta = path.join('uploads', file.originalname);
-    await fs.rename(file.path, nuevaRuta);
-    return nuevaRuta;
-};
+
+
 
 export const crearDonacion = async (req, res) => {
     try {
-        const imagenURL = await guardarImagenDonacion(req.file);
+        // Subir la imagen a Cloudinary
+        const result = await cloudinary.uploader.upload(req.file.path, {
+            folder: 'donaciones',
+            public_id: req.file.originalname.split('.')[0],
+            format: 'png'
+        });
+
+        // Crear la nueva donación con la URL de la imagen
         const donacionNueva = new Donacion({
             ...req.body,
-            imagenDonacion: imagenURL  // Guardamos la URL completa en la base de datos
+            imagenDonacion: result.secure_url
         });
+
+        // Guardar la nueva donación en la base de datos
         await donacionNueva.save();
+
+        // Enviar una respuesta al cliente
         res.status(201).json({ mensaje: 'Donación creada' });
     } catch (error) {
-        console.log(error);
-        res.status(400).json({ mensaje: 'La donación no fue creada' });
+        // Manejar los errores y enviar una respuesta al cliente
+        console.error(error);
+        res.status(400).json({ mensaje: 'La donación no fue creada', error });
     }
 };
 

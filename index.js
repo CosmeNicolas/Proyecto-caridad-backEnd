@@ -6,24 +6,23 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import donacionesRouter from './src/routes/donaciones.routes.js';
 import './src/database/database.js';
-import multer from 'multer';
 import { v2 as cloudinary } from 'cloudinary';
 import { CloudinaryStorage } from 'multer-storage-cloudinary';
-import Donacion from './src/database/models/donacion.js';  // Importa el modelo de donación
+import multer from 'multer';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
 
-// Configurar Cloudinary
-cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-    api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET,
+// Configuración de Cloudinary
+cloudinary.config({ 
+    cloud_name: "djo1eva9i", 
+    api_key: "977415767621127", 
+    api_secret: "oCHHLOrcu6RgbrcSqSkZO-LdT5o"
 });
 
-// Configurar Multer-Cloudinary Storage
+// Configuración de Multer-Cloudinary Storage
 const storage = new CloudinaryStorage({
     cloudinary: cloudinary,
     params: {
@@ -47,26 +46,16 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Sirve la carpeta 'public' como recursos estáticos
-app.use(express.static(path.join(__dirname, 'public')));
-
-// Ruta para manejar la carga de una sola imagen y creación de donación
-app.post('/api/donaciones/single', upload.single('imagenDonacion'), async (req, res) => {
-    try {
-        const imagenURL = req.file.path; // La URL de la imagen subida a Cloudinary
-        const donacionNueva = new Donacion({
-            ...req.body,
-            imagenDonacion: imagenURL
-        });
-        await donacionNueva.save();
-        res.status(201).json({ mensaje: 'Donación creada' });
-    } catch (error) {
-        console.error(error);
-        res.status(400).json({ mensaje: 'La donación no fue creada', error });
-    }
-});
+// Servir archivos estáticos
+const staticPath = path.join(__dirname, 'public');
+app.use(express.static(staticPath));
 
 // Rutas
 app.use('/api', donacionesRouter);
+
+// Para cualquier otra ruta, sirve el archivo index.html de la carpeta pública
+app.get('*', (req, res) => {
+    res.sendFile(path.join(staticPath, 'index.html'));
+});
 
 export default app;
