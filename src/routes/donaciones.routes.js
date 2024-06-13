@@ -24,7 +24,7 @@ router.route('/donaciones')
 
 router.route('/donaciones/:id')
     .get(obtenerDonacion)
-    .put(editarDonacionxID)
+    .put(upload.single('imagenDonacion'), editarDonacionxID)
     .delete(elimarDonacion);
 
 export default router;

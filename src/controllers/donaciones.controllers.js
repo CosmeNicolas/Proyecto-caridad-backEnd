@@ -30,6 +30,7 @@ export const obtenerDonacion = async (req, res) => {
 
 
 
+// Crear Donación
 export const crearDonacion = async (req, res) => {
     try {
         // Subir la imagen a Cloudinary
@@ -57,6 +58,7 @@ export const crearDonacion = async (req, res) => {
     }
 };
 
+
 // Editar Donación por ID
 export const editarDonacionxID = async (req, res) => {
     try {
@@ -64,11 +66,24 @@ export const editarDonacionxID = async (req, res) => {
         if (!donacionBuscada) {
             return res.status(404).json({ mensaje: 'No se encontró la donación con su ID' });
         }
-        await Donacion.findByIdAndUpdate(req.params.id, req.body);
-        res.status(200).json({ mensaje: 'La donación fue editada' });
+
+        // Si hay una nueva imagen, actualiza la imagen en Cloudinary
+        if (req.file) {
+            const result = await cloudinary.uploader.upload(req.file.path, {
+                folder: 'donaciones',
+                public_id: req.file.originalname.split('.')[0],
+                format: 'png'
+            });
+            req.body.imagenDonacion = result.secure_url;
+        }
+
+        // Actualiza los demás campos
+        const donacionActualizada = await Donacion.findByIdAndUpdate(req.params.id, req.body, { new: true });
+
+        res.status(200).json({ mensaje: 'La donación fue editada', donacion: donacionActualizada });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ mensaje: 'No se pudo editar la donación' });
+        res.status(500).json({ mensaje: 'No se pudo editar la donación', error });
     }
 };
 
