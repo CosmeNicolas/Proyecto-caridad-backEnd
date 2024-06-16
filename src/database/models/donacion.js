@@ -20,12 +20,12 @@ const donacionSchema = new Schema({
     categoria: {
         type: String,
         required: true,
-        enum: ["Ropa", "Papel", "Plastico", "Vidrio", "Muebles", "Electrodomestico", "Tecnologia y Accesorios", "Herramientas", "Otros"],
+        enum: ["Ropa", "Papel", "Plastico", "Vidrio", "Muebles", "Electrodomestico", "TecnologiaYaccesorios", "Herramientas","Apuntes","Libros","Otros"],
     },
     estado: {
         type: String,
         required: true,
-        enum: ["Casi nuevo", "Usado"],
+        enum: ["CasiNuevo", "Usado"],
     },
     nombreCooperador: {
         type: String,
