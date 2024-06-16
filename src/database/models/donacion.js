@@ -25,7 +25,7 @@ const donacionSchema = new Schema({
     estado: {
         type: String,
         required: true,
-        enum: ["CasiNuevo", "Usado"],
+        enum: ["Casi Nuevo", "Usado"],
     },
     nombreCooperador: {
         type: String,
