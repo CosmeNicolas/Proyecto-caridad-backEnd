@@ -17,9 +17,9 @@ const app = express();
 
 // Configuración de Cloudinary
 cloudinary.config({ 
-    cloud_name: "djo1eva9i", 
-    api_key: "977415767621127", 
-    api_secret: "oCHHLOrcu6RgbrcSqSkZO-LdT5o"
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME, 
+    api_key: process.env.CLOUDINARY_API_KEY, 
+    api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
 // Configuración de Multer-Cloudinary Storage
