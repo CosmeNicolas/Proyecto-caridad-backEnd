@@ -27,11 +27,11 @@ const donacionSchema = new Schema({
         required: true,
         enum: ["Casi Nuevo", "Usado"],
     },
-    nombreCooperador: {
+    nombrePersona: {
         type: String,
         required: true,
     },
-    numeroContacto: {
+    numeroPersona: {
         type: String,
         required: true,
         minLength: 10,
