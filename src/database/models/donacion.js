@@ -21,12 +21,17 @@ const donacionSchema = new Schema({
     categoria: {
         type: String,
         required: true,
-        enum: ["Ropa", "Papel", "Plastico", "Vidrio", "Muebles", "Electrodomesticos", "Tecnologia y Accesorios", "Herramientas", "Otros"],
+        enum: ["Ropa", "Bebés", "Papel", "Plastico", "Vidrio", "Muebles", "Electrodomesticos", "Tecnologia y Accesorios", "Herramientas", "Otros"],
     },
     estado: {
         type: String,
         required: true,
         enum: ["Casi nuevo", "Usado"],
+    },
+    localidad:{
+        type: String,
+        required: true,
+        enum: ["San Miguel de Tucumán", "Yerba Buena", "Trancas", "Burruyacú", "Tafí Viejo", "Tafí del Valle", "Lules", "Leales", "Cruz Alta", "Famaillá", "Monteros", "Chicligasta", "Simoca", "Río Chico", "Alberdi", "La Cocha", "Graneros", "Concepción"],
     },
     nombreCooperador: {
         type: String,
