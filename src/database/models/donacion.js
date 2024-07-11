@@ -44,7 +44,7 @@ const donacionSchema = new Schema({
     type: String,
     required: true,
     enum: [
-        "San miguel de tucumán",
+        "San Miguel de Tucumán",
         "Yerba buena",
         "Tranca",
         "Tafí viejo",
