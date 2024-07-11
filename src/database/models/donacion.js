@@ -46,7 +46,7 @@ const donacionSchema = new Schema({
     enum: [
         "San Miguel de Tucumán",
         "Yerba buena",
-        "Tranca",
+        "Trancas",
         "Tafí viejo",
         "Concepcion",
         "Burruyacu",
